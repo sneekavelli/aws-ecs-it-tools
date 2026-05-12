@@ -1,0 +1,14 @@
+# terraform folders & plugins
+.terraform/
+.terraform.lock.hcl
+
+# THE BIG ONES: State files (contain plain-text secrets)
+*.tfstate
+*.tfstate.backup
+
+# Sensitive variable files
+*.tfvars
+*.tfvars.json
+
+# OS junk
+.DS_Store
