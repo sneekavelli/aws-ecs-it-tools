@@ -6,3 +6,4 @@ resource "aws_ecr_repository" "app" {
     scan_on_push = true # Automatically checks your code for vulnerabilities
   }
 }
+# This resource creates an ECR repository named "it-tools-app" with mutable image tags and enables automatic vulnerability scanning on image push. The repository URL will be outputted for use in other modules, such as the ECS task definition where you specify the container image.

@@ -18,4 +18,4 @@ variable "target_group_arn" {
   type        = string
 }
 
-# Add any other variables below ONLY if they aren't already listed above
+# These variables are required for the ECS module to create the ECS cluster, service, and task definition. The ecr_repository_url is needed to specify the container image in the task definition, public_subnet_ids are needed to place the ECS tasks in the correct subnets, ecs_sg_id is needed to associate the ECS tasks with the correct security group, and target_group_arn is needed to register the ECS service with the ALB target group for load balancing.
