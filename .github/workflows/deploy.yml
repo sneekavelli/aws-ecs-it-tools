@@ -1,0 +1,39 @@
+name: "Terraform Infrastructure CI/CD"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  terraform_validation:
+    name: "Terraform Lint & Validate"
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./infra
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform CLI
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.0
+
+      - name: Check Code Formatting
+        run: terraform fmt -check
+
+      - name: Initialize Working Directory
+        run: terraform init -backend=false
+
+      - name: Validate Configurations
+        run: terraform validate
