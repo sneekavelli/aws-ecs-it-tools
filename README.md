@@ -1,3 +1,5 @@
+<img width="472" height="345" alt="ECS_project_ Lucidchart" src="https://github.com/user-attachments/assets/21b8d1db-b24b-4402-9492-1cf2e1e0c25d" />
+<img width="472" height="345" alt="ECS_project_ Lucidchart" src="https://github.com/user-attachments/assets/825b3a63-a53a-4883-9e77-b458657c736d" />
 ## 🚀 Deployment Lifecycle Runbook
 
 ### Prerequisites
@@ -87,3 +89,5 @@ git push origin main
 │   │  └──────────────────────────────┘  └──────────────────────────┘  │   │  │
 │   └──────────────────────────────────────────────────────────────────┘   │  │
 └─────────────────────────────────────────────────────────────────────────────┘
+<img width="472" height="345" alt="ECS_project_ Lucidchart" src="https://github.com/user-attachments/assets/bffd9ecd-8b8b-4dec-b9be-0a35825f7619" /<img width="472" height="345" alt="ECS_project_ Lucidchart" src="https://github.com/user-attachments/assets/02d6211b-35eb-4912-a4b6-fc485938a8b4" />
+
