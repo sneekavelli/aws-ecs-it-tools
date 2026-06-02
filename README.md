@@ -70,7 +70,8 @@ git push origin main
 │                                                                          │  │
 │ 🔒 PRIVATE NETWORK SET 1: APPLICATION TIER                               │  │
 │   ┌──────────────────────────────────────────────────────────────────┐   │  │
-│   │ [ECS Task Security Group: Ingress from ALB SG Only]              │   │  │
+│   │ [ECS Task Security Group: Ingress from ALB SG Only]              │   <img width="1970" height="1438" alt="Blank diagram_ Lucidchart" src="https://github.com/user-attachments/assets/ce7cfbce-753f-46d9-b7e8-8ffb15463bd6" />
+│  │
 │   │                                                                  │   │  │
 │   │  ┌──────────────────────────────┐  ┌──────────────────────────┐  │   │  │
 │   │  │ ECS Fargate Task (AZ-A)       │  │ ECS Fargate Task (AZ-B)  │  │   │  │
@@ -89,5 +90,5 @@ git push origin main
 │   │  └──────────────────────────────┘  └──────────────────────────┘  │   │  │
 │   └──────────────────────────────────────────────────────────────────┘   │  │
 └─────────────────────────────────────────────────────────────────────────────┘
-<img width="472" height="345" alt="ECS_project_ Lucidchart" src="https://github.com/user-attachments/assets/bffd9ecd-8b8b-4dec-b9be-0a35825f7619" /<img width="472" height="345" alt="ECS_project_ Lucidchart" src="https://github.com/user-attachments/assets/02d6211b-35eb-4912-a4b6-fc485938a8b4" />
+
 
