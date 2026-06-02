@@ -6,6 +6,8 @@ output "public_subnet_ids" {
   value = [for s in aws_subnet.public : s.id]
 }
 
+# This output provides a list of IDs for the public subnets created in this module. These IDs are essential for referencing the subnets in other modules (e.g., when creating security groups or route tables).
+
 output "igw_id" {
   value = aws_internet_gateway.igw.id
 }
