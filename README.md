@@ -1,5 +1,5 @@
-<img width="472" height="345" alt="ECS_project_ Lucidchart" src="https://github.com/user-attachments/assets/21b8d1db-b24b-4402-9492-1cf2e1e0c25d" />
-<img width="472" height="345" alt="ECS_project_ Lucidchart" src="https://github.com/user-attachments/assets/825b3a63-a53a-4883-9e77-b458657c736d" />
+<img width="1970" height="1438" alt="Blank diagram_ Lucidchart" src="https://github.com/user-attachments/assets/c07e3bb2-3866-498c-a4f0-0fd3d62e024e" />
+
 ## 🚀 Deployment Lifecycle Runbook
 
 ### Prerequisites
