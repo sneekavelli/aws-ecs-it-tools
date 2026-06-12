@@ -14,6 +14,7 @@ module "alb" {
   vpc_id            = module.vpc.vpc_id
   public_subnet_ids = module.vpc.public_subnet_ids
   alb_sg_id         = aws_security_group.alb_sg.id
+  certificate_arn  = module.acm.certificate_arn  # ◄── Updated this line here!
 }
 
 output "alb_dns_name" {

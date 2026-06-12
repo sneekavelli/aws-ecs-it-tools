@@ -1,10 +1,14 @@
-output "alb_dns_name" {
-    value       = aws_lb.main.dns_name
-    description = "The DNS name of the load balancer"
+output "dns_name" {
+  value       = aws_lb.main.dns_name
+  description = "The public DNS name of the ALB"
 }
-# Output the DNS name of the ALB so it can be used in other modules or output at the root level
-output "target_group_arn" {
-  value = aws_lb_target_group.app.arn
-}
-# Output the ARN of the Target Group so it can be used in other modules (e.g., to register ECS tasks as targets)
 
+output "zone_id" {
+  value       = aws_lb.main.zone_id
+  description = "The Route 53 Hosted Zone ID of the ALB"
+}
+
+output "target_group_arn" {
+  value       = aws_lb_target_group.app.arn  # ◄── Updated .main to .app
+  description = "The ARN of the target group created inside the ALB module"
+}

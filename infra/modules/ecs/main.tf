@@ -65,6 +65,10 @@ resource "aws_iam_role" "ecs_task_execution_role" {
 resource "aws_iam_role_policy_attachment" "ecs_execution_role_ecr" {
   role       = "it-tools-ecs-execution-role" # Make sure this matches your role name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+
+  depends_on = [
+    aws_iam_role.ecs_task_execution_role   
+  ]
 }
 
 # This attachment gives your ECS tasks the necessary permissions to pull images from ECR and perform other actions required for task execution. The AmazonECSTaskExecutionRolePolicy includes permissions for ECR, CloudWatch Logs, and other services that ECS tasks commonly interact with during execution.

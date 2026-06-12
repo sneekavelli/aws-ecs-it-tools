@@ -1,5 +1,25 @@
-variable "vpc_id" {}
-variable "public_subnet_ids" { type = list(string) }
-variable "alb_sg_id" {}
+variable "vpc_id" {
+  type        = string
+  description = "The ID of the VPC"
+}
 
-# These variables are required for the ALB module to create the Application Load Balancer and its associated resources. The vpc_id is needed to associate the ALB with the correct VPC, public_subnet_ids are needed to place the ALB in the correct subnets, and alb_sg_id is needed to associate the ALB with the correct security group.
+variable "public_subnet_ids" {
+  type        = list(string)
+  description = "The public subnet IDs for the ALB"
+}
+
+variable "alb_sg_id" {
+  type        = string
+  description = "The security group ID for the ALB"
+}
+
+variable "certificate_arn" {
+  type        = string
+  description = "The ARN of the validated ACM certificate"
+}
+
+variable "target_group_arn" {
+  type        = string
+  default     = ""
+  description = "Optional target group ARN if passed from outside"
+}
