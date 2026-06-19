@@ -1,4 +1,3 @@
-<img width="2735" height="1860" alt="A_A_D" src="https://github.com/user-attachments/assets/7637225e-81e4-4b85-94b6-5b751c7d7f45" />
 
 
 ## 🚀 Deployment Lifecycle Runbook
@@ -48,48 +47,6 @@ git push origin main
 
 
 
-[ Public Internet ] 
-       │
-       ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ AWS VPC BOUNDARY                                                            │
-│                                                                             │
-│   ┌───────────────────────┐                                                 │
-│   │   Internet Gateway    │◀─────────────────────────────────────────────┐  │
-│   └───────────────────────┘                                              │  │
-│               │                                                          │  │
-│               ▼                                                          │  │
-│ 🌐 PUBLIC SUBNETS (ALB Tier)                                               │  │
-│   ┌──────────────────────────────────────────────────────────────────┐   │  │
-│   │ [ALB Security Group: Ingress 80/443 from 0.0.0.0/0]              │   │  │
-│   │                                                                  │   │  │
-│   │  Application Load Balancer (Distributed across Public AZ-A/B)    │   │  │
-│   │    └─► HTTP-to-HTTPS Redirection Listener                        │   │  │
-│   └──────────────────────────────────────────────────────────────────┘   │  │
-│               │                                                          │  │
-│               ▼ (Forwards traffic across isolation boundary via Target Group)│
-│                                                                          │  │
-│ 🔒 PRIVATE NETWORK SET 1: APPLICATION TIER                               │  │
-│   ┌──────────────────────────────────────────────────────────────────┐   │  │
-│   │ [ECS Task Security Group: Ingress from ALB SG Only]              │   <img width="1970" height="1438" alt="Blank diagram_ Lucidchart" src="https://github.com/user-attachments/assets/ce7cfbce-753f-46d9-b7e8-8ffb15463bd6" />
-│  │
-│   │                                                                  │   │  │
-│   │  ┌──────────────────────────────┐  ┌──────────────────────────┐  │   │  │
-│   │  │ ECS Fargate Task (AZ-A)       │  │ ECS Fargate Task (AZ-B)  │  │   │  │
-│   │  │  └─► it-tools container      │  │  └─► it-tools container  │  │   │  │
-│   │  └──────────────────────────────┘  └──────────────────────────┘  │   │  │
-│   └──────────────────────────────────────────────────────────────────┘   │  │
-│               │                                                          │  │
-│               ▼ (Internal VPC Endpoints / Secured Registry Pulls)        │  │
-│                                                                          │  │
-│ 🔒 PRIVATE NETWORK SET 2: SUPPORT & DATA TIER                            │  │
-│   ┌──────────────────────────────────────────────────────────────────┐   │  │
-│   │ [Isolated Subnets: No Direct Inbound / Secure Core Services]      │   │  │
-│   │                                                                  │   │  │
-│   │  ┌──────────────────────────────┐  ┌──────────────────────────┐  │   │  │
-│   │  │ Amazon ECR Registry          │  │ CloudWatch Core Logging  │  │   │  │
-│   │  └──────────────────────────────┘  └──────────────────────────┘  │   │  │
-│   └──────────────────────────────────────────────────────────────────┘   │  │
-└─────────────────────────────────────────────────────────────────────────────┘
+<img width="1536" height="1024" alt="AWS-ECS-ARCH-DIAGRAM" src="https://github.com/user-attachments/assets/d1f7d90f-e186-4917-8d47-b5e21aabeaa6" />
 
 
