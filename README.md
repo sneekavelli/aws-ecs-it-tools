@@ -1,3 +1,4 @@
+<img width="1536" height="1024" alt="AWS-ECS-ARCH-DIAGRAM" src="https://github.com/user-attachments/assets/d45c81f9-daa7-4ecd-b8b5-966bd9ee5271" />
 
 
 ## 🚀 Deployment Lifecycle Runbook
