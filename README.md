@@ -43,10 +43,9 @@ git commit -m "docs: correct deployment directory pathways to reflect root repo 
 # 3. Securely push to your GitHub branch
 git push origin main
 
+<img width="1536" height="1024" alt="AWS-ECS-ARCH-DIAGRAM" src="https://github.com/user-attachments/assets/05896eb1-ab99-43ee-9975-bc5064bbe55c" />
 
 
 
-
-<img width="1536" height="1024" alt="AWS-ECS-ARCH-DIAGRAM" src="https://github.com/user-attachments/assets/d1f7d90f-e186-4917-8d47-b5e21aabeaa6" />
 
 
