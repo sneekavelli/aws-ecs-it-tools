@@ -29,8 +29,7 @@ resource "aws_lb_target_group" "app" {
   }
 }
 # This resource creates a Target Group for the ALB. The Target Group is configured to listen on port 8080 and uses the HTTP protocol. It is associated with the VPC specified by var.vpc_id. The target type is set to "ip", which means that the ALB will route traffic to IP addresses (in this case, the IPs of the ECS tasks). The health check configuration ensures that the ALB can monitor the health of the targets and route traffic only to healthy instances.
-r# 2. Automatically link your certificate to your HTTPS listener dynamically
-# 2. Automatically link your certificate to your HTTPS listener dynamically
+# Automatically link your certificate to your HTTPS listener dynamically
 resource "aws_lb_listener" "https" {
   load_balancer_arn = aws_lb.main.arn
   port              = "443"
@@ -40,7 +39,22 @@ resource "aws_lb_listener" "https" {
 
   default_action {
     type             = "forward"
-    # ◄── UPDATE THIS SPECIFIC LINE RIGHT HERE ──►
     target_group_arn = aws_lb_target_group.app.arn
+  }
+}
+
+resource "aws_lb_listener" "http" {
+  load_balancer_arn = aws_lb.main.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
   }
 }
