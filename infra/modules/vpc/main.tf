@@ -6,7 +6,7 @@ resource "aws_vpc" "main" {
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
-  tags       = { Name = "it-tools-igw" }
+  tags   = { Name = "it-tools-igw" }
 }
 # This resource creates an Internet Gateway and attaches it to the VPC. The Internet Gateway allows resources within the VPC to communicate with the internet, which is essential for your ALB to receive traffic from users and for your ECS tasks to access external services if needed.
 
@@ -38,3 +38,52 @@ resource "aws_route_table_association" "public" {
 }
 
 # This resource creates a route table for the public subnets and defines a route that directs all outbound traffic (
+# Private subnets for ECS tasks
+resource "aws_subnet" "private" {
+  for_each                = var.private_subnet_cidrs
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = each.value
+  availability_zone       = each.key
+  map_public_ip_on_launch = false
+
+  tags = {
+    Name = "private-${each.key}"
+  }
+}
+
+# Elastic IP for NAT Gateway
+resource "aws_eip" "nat" {
+  domain     = "vpc"
+  depends_on = [aws_internet_gateway.igw]
+}
+
+# NAT Gateway in a public subnet
+resource "aws_nat_gateway" "nat" {
+  allocation_id = aws_eip.nat.id
+  subnet_id     = values(aws_subnet.public)[0].id
+
+  tags = {
+    Name = "it-tools-nat"
+  }
+}
+
+# Private route table
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.nat.id
+  }
+
+  tags = {
+    Name = "private-rt"
+  }
+}
+
+# Associate private subnets with private route table
+resource "aws_route_table_association" "private" {
+  for_each       = aws_subnet.private
+  subnet_id      = each.value.id
+  route_table_id = aws_route_table.private.id
+}

@@ -11,3 +11,8 @@ output "public_subnet_ids" {
 output "igw_id" {
   value = aws_internet_gateway.igw.id
 }
+
+output "private_subnet_ids" {
+  value       = values(aws_subnet.private)[*].id
+  description = "List of private subnet IDs"
+}

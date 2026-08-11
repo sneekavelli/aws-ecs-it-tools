@@ -19,7 +19,7 @@ module "alb" {
 # 2. ECS Module consumes the Target Group FROM the ALB module output
 module "ecs" {
   source             = "./modules/ecs"
-  public_subnet_ids  = module.vpc.public_subnet_ids
+  private_subnet_ids = module.vpc.private_subnet_ids
   ecr_repository_url = module.ecr.repository_url
   ecs_sg_id          = aws_security_group.ecs_sg.id
   target_group_arn   = module.alb.target_group_arn

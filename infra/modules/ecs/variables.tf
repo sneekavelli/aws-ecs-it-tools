@@ -3,8 +3,8 @@ variable "ecr_repository_url" {
   type        = string
 }
 
-variable "public_subnet_ids" {
-  description = "List of public subnet IDs"
+variable "private_subnet_ids" {
+  description = "List of private subnet IDs"
   type        = list(string)
 }
 
