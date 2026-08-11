@@ -16,7 +16,7 @@ HTTP requests on port 80 are automatically redirected to HTTPS on port 443.
 
 ## 🏗️ Architecture
 
-<img width="1536" height="1024" alt="AWS ECS Architecture Diagram" src="https://github.com/user-attachments/assets/05896eb1-ab99-43ee-9975-bc5064bbe55c" />
+<img width="1536" height="1024" alt="AWS ECS Fargate Architecture Diagram" src="https://github.com/user-attachments/assets/c3dd5341-c83c-4546-8145-188470e110fa" />
 
 > **Note:** The architecture diagram should reflect the current deployment: the ALB resides in public subnets while ECS Fargate tasks reside in private subnets and use a NAT Gateway for outbound internet access.
 
