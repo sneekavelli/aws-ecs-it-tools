@@ -22,7 +22,7 @@ module "ecs" {
   public_subnet_ids  = module.vpc.public_subnet_ids
   ecr_repository_url = module.ecr.repository_url
   ecs_sg_id          = aws_security_group.ecs_sg.id
-  target_group_arn   = module.alb.target_group_arn 
+  target_group_arn   = module.alb.target_group_arn
   depends_on = [
     module.alb
   ]
@@ -32,19 +32,19 @@ module "ecs" {
 module "dns" {
   source       = "./modules/dns"
   alb_dns_name = module.alb.dns_name
-  alb_zone_id  = module.alb.zone_id 
+  alb_zone_id  = module.alb.zone_id
 }
 
 # 4. Fixed Root Output matching your actual ALB module outputs
 output "alb_dns_name" {
-  value = module.alb.dns_name 
+  value = module.alb.dns_name
 }
 module "acm" {
   source = "./modules/acm" # ◄── Points to your local custom module folder
 
   project_name = "it-tools"
   domain_name  = "it-tools.humblehotheads.com"
-  zone_id      = "Z0681268194PMVM3PTLNZ" # Replace with your real Route 53 Zone ID
+  zone_id      = data.aws_route53_zone.primary.zone_id
 
   subject_alternative_names = [
     "it-tools.humblehotheads.com"
