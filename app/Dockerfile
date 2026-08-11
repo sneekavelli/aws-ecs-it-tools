@@ -1,8 +1,27 @@
-# Pull the official production-ready IT-Tools image directly from Docker Hub
-FROM nicolasboost/it-tools:latest
+# Build stage
+FROM node:lts-alpine AS build-stage
 
-# Expose port 80 for the AWS Application Load Balancer to connect to
+ENV NPM_CONFIG_LOGLEVEL=warn
+ENV CI=true
+
+WORKDIR /app
+
+COPY package.json pnpm-lock.yaml ./
+
+RUN corepack enable \
+    && corepack prepare pnpm@9.11.0 --activate \
+    && pnpm install --frozen-lockfile
+
+COPY . .
+
+RUN pnpm build
+
+# Production stage
+FROM nginx:stable-alpine AS production-stage
+
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 EXPOSE 80
 
-# Run the standard Nginx server embedded inside the container
 CMD ["nginx", "-g", "daemon off;"]
