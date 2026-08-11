@@ -5,18 +5,26 @@ resource "aws_security_group" "alb_sg" {
   vpc_id      = module.vpc.vpc_id
 
   ingress {
-    description      = "HTTP from everywhere"
-    from_port        = 80
-    to_port          = 80
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "HTTP from everywhere"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "HTTPS from everywhere"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1" # Allow all outbound traffic
-    cidr_blocks      = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1" # Allow all outbound traffic
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
@@ -27,8 +35,8 @@ resource "aws_security_group" "ecs_sg" {
   vpc_id      = module.vpc.vpc_id
 
   ingress {
-    from_port       = 8080 # The port which app runs on
-    to_port         = 8080
+    from_port       = 80 # The port which app runs on
+    to_port         = 80
     protocol        = "tcp"
     security_groups = [aws_security_group.alb_sg.id] # Only allow traffic from the ALB security group
   }
@@ -37,6 +45,6 @@ resource "aws_security_group" "ecs_sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]# Allow all outbound traffic so the app can access the internet if needed (e.g., for updates or external APIs)
+    cidr_blocks = ["0.0.0.0/0"] # Allow all outbound traffic so the app can access the internet if needed (e.g., for updates or external APIs)
   }
 }

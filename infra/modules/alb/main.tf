@@ -10,14 +10,14 @@ resource "aws_lb" "main" {
 
 resource "aws_lb_target_group" "app" {
   name        = "it-tools-tg"
-  port        = 8080
+  port        = 80
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
   target_type = "ip"
 
   health_check {
     path                = "/"
-    port                = "8080"
+    port                = "80"
     healthy_threshold   = 3
     unhealthy_threshold = 3
     timeout             = 5
@@ -35,5 +35,21 @@ resource "aws_lb_listener" "https" {
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.app.arn
+  }
+}
+
+resource "aws_lb_listener" "http" {
+  load_balancer_arn = aws_lb.main.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
   }
 }

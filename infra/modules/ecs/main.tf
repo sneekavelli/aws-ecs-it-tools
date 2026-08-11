@@ -19,10 +19,10 @@ resource "aws_ecs_service" "main" {
   load_balancer {
     target_group_arn = var.target_group_arn
     container_name   = "it-tools"
-    container_port   = 8080
+    container_port   = 80
   }
 }
-# This block configures the load balancer settings for the ECS service. It specifies that the service should be registered with the target group defined by var.target_group_arn, and that the container named "it-tools" should listen on port 8080 for incoming traffic from the ALB. This allows the ALB to route traffic to the ECS tasks running your application.
+# This block configures the load balancer settings for the ECS service. It specifies that the service should be registered with the target group defined by var.target_group_arn, and that the container named "it-tools" should listen on port 80 for incoming traffic from the ALB. This allows the ALB to route traffic to the ECS tasks running your application.
 
 resource "aws_ecs_task_definition" "app" {
   family                   = "it-tools-task"
@@ -39,12 +39,12 @@ resource "aws_ecs_task_definition" "app" {
     image     = "${var.ecr_repository_url}:latest"
     essential = true
     portMappings = [{
-      containerPort = 8080
-      hostPort      = 8080
+      containerPort = 80
+      hostPort      = 80
     }]
   }])
 }
-# This resource defines the ECS task that will run your application. It specifies the family name, network mode, compatibility with Fargate, CPU and memory requirements, and the execution role for pulling the container image from ECR. The container definitions specify the name of the container, the image to use (with the latest tag from the ECR repository), and the port mappings to allow traffic on port 8080.
+# This resource defines the ECS task that will run your application. It specifies the family name, network mode, compatibility with Fargate, CPU and memory requirements, and the execution role for pulling the container image from ECR. The container definitions specify the name of the container, the image to use (with the latest tag from the ECR repository), and the port mappings to allow traffic on port 80.
 
 resource "aws_iam_role" "ecs_task_execution_role" {
   # This name is what AWS sees in the console
