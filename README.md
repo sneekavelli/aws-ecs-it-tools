@@ -1,6 +1,7 @@
 # AWS ECS Fargate Infrastructure Project
 
 A production-style AWS container deployment built with **Terraform, Docker, Amazon ECS Fargate, ECR, Application Load Balancer, Route 53 and ACM**.
+<img width="1728" height="1117" alt="Screenshot 2026-08-12 at 14 37 11" src="https://github.com/user-attachments/assets/5952a0f2-09ab-47b0-8984-1c6ce3f4e9ba" />
 
 The project deploys the open-source IT-Tools application from source into a secure AWS network architecture. ECS tasks run inside **private subnets** without public IP addresses, while an internet-facing Application Load Balancer provides HTTPS access to the application.
 
